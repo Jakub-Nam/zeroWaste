@@ -1,8 +1,11 @@
-const food = false;
+import { pushData } from "./database.js";
 
-const addFood = () => {
-    
-    console.log('addfood', food)
-    food = true;
-    console.log('addfood', food)
-}
+
+const addBtn = document.querySelector('.addBtn')
+
+addBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    pushData();
+
+
+});
