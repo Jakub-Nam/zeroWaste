@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form class="logForm">
+        <p></p>
+        <label for='inputEmail'>Adres Email</label>
+        <input type='email' id='inputEmail' name='inputEmail' aria-describedby='emailHelp' autocomplete='on'
+            placeholder='Email adres...'>
+
+        <label for='inputPassword'>Hasło</label>
+        <input type='password' id='inputPassword' name='inputPassword' autocomplete='on' placeholder='Password'>
+        <button type='submit' id="formBtnLogin" class='form_btn'>Zaloguj</button>
+    </form>
+    <main>
+        <h1>Witaj w aplikacji ZerWaste!</h1>
+        <h3>Z nami juznigdy nie zmarnujesz jedzenia</h3>
+        <p>Dodaj pokarm, ktorego z nami nie zapomnisz zjeść!</p>
+        <button onclick="addFood()">Dodaj</button>
+    </main>
+
+    <p></p>
+    <script src="./environment.js" type="module"></script>
+    <script src="./src/scripts/script.js" type="module"></script>
+    <script src="./src/scripts/database.js" type="module"></script>
+    <script src="./src/scripts/auth.js" type="module"></script>
+
+
+    <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js'></script>
+    <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js'></script>
+    <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js'></script>
+
+</body>
+
+</html>
