@@ -18,8 +18,6 @@ logForm.addEventListener('submit', e => {
         .then(response => {
             logForm.setAttribute('style', 'display: none;');
             console.log('response', response)
-
-
         })
         .catch(err => {
             alert('Wystąpił błąd podczas procesu logowania')

@@ -21,10 +21,17 @@
     </form>
     <main>
         <h1>Witaj w aplikacji ZerWaste!</h1>
-        <h3>Z nami juznigdy nie zmarnujesz jedzenia</h3>
+        <h3>Z nami juz nigdy nie zmarnujesz jedzenia</h3>
         <p>Dodaj pokarm, ktorego z nami nie zapomnisz zjeść!</p>
-        <section>??</section>
+        </br>
+        <label for='inputData'>Jedzenie, ktore nie moze sie zmarnowac</label>
+        </br>
+        <input type='string' id='inputFood' name='inputFood' placeholder='np. ogórek'>
+        </br>
         <button class="addBtn">Dodaj</button>
+        <section>
+            <ul></ul>
+        </section>
     </main>
 
     <p></p>
@@ -32,7 +39,7 @@
     <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js'></script>
     <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js'></script>
     <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js'></script>
-    
+
     <script type="module" src="./environment.js"></script>
     <script type="module" src="./src/scripts/database.js"></script>
     <script type="module" src="./src/scripts/auth.js"></script>

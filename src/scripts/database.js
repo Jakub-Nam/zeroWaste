@@ -1,42 +1,35 @@
 const db = firebase.firestore();
+const dataRef = db.collection("data").doc("time");
 
 export function pushData() {
-    db.collection("data").doc("time").get()
+    dataRef.set()
 }
 
-async function getData() {
+export async function getData() {
     try {
         let data;
-        return data = await db.collection("data").doc("time").get()
+        return data = await dataRef.get()
     } catch (err) {
-        return console.log('nie pykło', err)
+        return console.log(err)
     }
 
 };
 
-// return an array zmiento potem
-const showData = async (data) => {
+export const changeToArr = async (data) => {
     let documents = await data;
-    await console.log(documents.data(), 'zwraca object')
-    const values = await Object.values(documents.data());
-    await console.log(values, 'zwraca tablie values');
-    return values;
+    let arr = Object.values(documents.data())
+    return arr;
 }
 
+export async function setData(data) {
+   try{
+    await dataRef.set(data)
+    console.log('dodales dane')
+   } catch (err) {
+    console.log(err)
+   }
 
-// getData();
-console.log(showData(getData()))
 
-const changeDOM = async (values) => {
-    const x = document.querySelector('section')
-
-    await console.log('changedom values', values)
-    await console.log('dlugosc values', values.lenght)
-     
-    // await for (let i = 0; i < values.lenght; i++) {
-    //     x.innerHTML += values[i];
-    //     x.innerHTML += 'chleb';
-    }
 }
 
-changeDOM(showData(getData()))
+// musisz przeanalizowac jak powinna wygladac relacja miedzy baza danych, a strona www.
