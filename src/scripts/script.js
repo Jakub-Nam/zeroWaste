@@ -8,14 +8,6 @@ const addBtn = document.querySelector('.addBtn');
 const foodInput = document.querySelector('input[name="inputFood"]');
 const ulEle = document.querySelector('section ul');
 
-addBtn.addEventListener('click', e => {
-    e.preventDefault();
-    setData({pasza: foodInput.value})
-    foodInput.value = ''
-    // w przyszlosci mozesz zrobisz .reset() na formularzu, wyczyscisz all inputy
-});
-
-
 const addToList = (values) => {
     values.then(arr => {
             for (let i = 0; i < arr.length; i++) {
@@ -27,7 +19,12 @@ const addToList = (values) => {
         })
 }
 
-addToList(changeToSimpleArr(getData()))
+addBtn.addEventListener('click', e => {
+    e.preventDefault();
+    setData({food: foodInput.value})
+    foodInput.value = ''
+    // w przyszlosci mozesz zrobisz .reset() na formularzu, wyczyscisz all inputy
+});
 
 ulEle.addEventListener('click', e => {
     e.preventDefault();
@@ -37,3 +34,6 @@ ulEle.addEventListener('click', e => {
     }
     // console.log(e.)
 })
+
+addToList(changeToSimpleArr(getData()))
+
