@@ -42,43 +42,36 @@
                             <label class="form-label" for="loginPassword">Password</label>
                         </div>
 
-                        <!-- 2 column grid layout -->
                         <div class="row mb-4">
-                            <div class="col-md-6 d-flex justify-content-center">
-                                <!-- Checkbox -->
+                            <!-- <div class="col-md-6 d-flex justify-content-center">
                                 <div class="form-check mb-3 mb-md-0">
                                     <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
                                     <label class="form-check-label" for="loginCheck"> Remember me </label>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-md-6 d-flex justify-content-center">
-                                <!-- Simple link -->
+                            <!-- <div class="col-md-6 d-flex justify-content-center">
                                 <a href="#!">Forgot password?</a>
-                            </div>
+                            </div> -->
                         </div>
 
-                        <!-- Submit button -->
                         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
                     </form>
                 </div>
                 <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                    <form>
+                    <form id="signUpForm">
 
-                        <!-- Email input -->
                         <div class="form-outline mb-4">
                             <input type="email" id="registerEmail" class="form-control" />
                             <label class="form-label" for="registerEmail">Email</label>
                         </div>
 
-                        <!-- Password input -->
                         <div class="form-outline mb-4">
                             <input type="password" id="registerPassword" class="form-control" />
                             <label class="form-label" for="registerPassword">Password</label>
                         </div>
 
-                        <!-- Repeat Password input -->
                         <div class="form-outline mb-4">
                             <input type="password" id="registerRepeatPassword" class="form-control" />
                             <label class="form-label" for="registerRepeatPassword">Repeat password</label>
@@ -89,27 +82,25 @@
                     </form>
                 </div>
             </div>
-            <!-- Pills content -->
-
         </div>
         <div class="col-lg-3"></div>
     </div>
     <main class="fade">
-       
+
         <h3>Z nami juz nigdy nie zmarnujesz jedzenia</h3>
-        <p>Dodaj pokarm, ktorego z nami nie zapomnisz zjeść!</p>
-        </br>
-        <label for='inputData'>Jedzenie, ktore nie moze sie zmarnowac</label>
+
+        <label for='inputData'>Dodaj pokarm, ktorego z nami nie zapomnisz zjeść!</label>
         </br>
         <input type='string' id='inputFood' name='inputFood' placeholder='np. ogórek'>
         </br>
         <button class="addBtn">Dodaj</button>
+        </br>
         <section>
             <ul></ul>
         </section>
-        <button class="getData">getData</button>
+        <button class="getData">Odśwież liste</button>
     </main>
-    
+
     <p></p>
 
     <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js'></script>

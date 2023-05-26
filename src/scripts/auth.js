@@ -16,6 +16,7 @@ const divReg = document.querySelector('#pills-register')
 const divCont = document.querySelector('.div-container');
 
 const loginForm = document.querySelector('#loginForm');
+const signUpForm = document.querySelector('#signUpForm');
 let userId = 'non-empty-string';
 
 export const returnUserId = () => {
@@ -23,6 +24,9 @@ export const returnUserId = () => {
 }
 
 const logRegToggler = () => {
+    loginForm.reset();
+    signUpForm.reset();
+
     if (!aLog.classList.contains("active")) {
         aLog.classList.add('active')
         aReg.classList.remove('active')
@@ -39,6 +43,31 @@ const logRegToggler = () => {
         return
     }
 }
+
+const firebaseLogin = (login, password) => {
+    firebase.auth().signInWithEmailAndPassword(login, password)
+        .then(response => {
+            divCont.setAttribute('style', 'display: none;');
+            showMain()
+            localStorage.setItem('email', login);
+            localStorage.setItem('password', password)
+            return userId = response.user.uid;
+        })
+        .catch(err => {
+            console.log(err)
+            alert('Wystąpił błąd podczas procesu logowania')
+        });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedEmail = localStorage.getItem('email');
+    const savedPassword = localStorage.getItem('password');
+    if (savedEmail !== undefined && savedPassword !== undefined) {
+        // console.log(savedEmail, savedPassword)
+        firebaseLogin(savedEmail, savedPassword)
+    }
+});
+
 aLog.addEventListener('click', () => {
     logRegToggler()
 })
@@ -54,14 +83,28 @@ loginForm.addEventListener('submit', e => {
     const inputPassword = document.querySelector('#loginPassword').value;
     const user = new User(inputEmail, inputPassword);
 
-    firebase.auth().signInWithEmailAndPassword(user.login, user.password)
-        .then(response => {
-            divCont.setAttribute('style', 'display: none;');
-            showMain()
-            return userId = response.user.uid;
-        })
-        .catch(err => {
-            console.log(err)
-            alert('Wystąpił błąd podczas procesu logowania')
-        });
+    firebaseLogin(user.login, user.password)
 });
+
+signUpForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const email = document.querySelector('#registerEmail').value;
+    const password = document.querySelector('#registerPassword').value;
+    const repeatPassword = document.querySelector('#registerRepeatPassword').value;
+
+    if (password === repeatPassword) {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                signUpForm.reset();
+                logRegToggler();
+
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error('Błąd podczas tworzenia konta:', errorCode, errorMessage);
+            });
+    }
+})

@@ -10,9 +10,6 @@ const ulEle = document.querySelector('section ul');
 
 const main = document.querySelector('main')
 
-
-
-
 const addToList = (foodObjcs) => {
     ulEle.innerHTML = '';
     foodObjcs.then((arr) => {
@@ -43,10 +40,6 @@ btnGetData.addEventListener('click', e => {
     addToList(getData());
     // console.log(getData())
 })
-
-
-
-
 
 addBtn.addEventListener('click', e => {
     e.preventDefault();
