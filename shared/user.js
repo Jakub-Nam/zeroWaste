@@ -1,7 +1,6 @@
-class User {
-    constructor(username, password)
-    username = this.username;
-    password = this.password;
-    login() {};
-    logout() {};
-};
+export class User {
+    constructor(login, password) {
+        this.login = login,
+            this.password = password
+    }
+}

@@ -5,22 +5,97 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
-<body>
+<body class="container">
+    <h1 class="text-center">Witaj w aplikacji ZeroWaste!</h1>
+    <div class="row m-5">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 div-container">
 
-    <form class="logForm">
-        <p></p>
-        <label for='inputEmail'>Adres Email</label>
-        <input type='email' id='inputEmail' name='inputEmail' aria-describedby='emailHelp' autocomplete='on'
-            placeholder='Email adres...'>
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#" role="tab"
+                        aria-controls="pills-login" aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link " id="tab-register" data-mdb-toggle="pill" href="#" role="tab"
+                        aria-controls="pills-register" aria-selected="false">Register</a>
+                </li>
+            </ul>
 
-        <label for='inputPassword'>Hasło</label>
-        <input type='password' id='inputPassword' name='inputPassword' autocomplete='on' placeholder='Password'>
-        <button type='submit' id="formBtnLogin" class='form_btn'>Zaloguj</button>
-    </form>
-    <main>
-        <h1>Witaj w aplikacji ZerWaste!</h1>
+            <!-- Pills content -->
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                    <form id="loginForm">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="loginName" class="form-control" />
+                            <label class="form-label" for="loginName">Email or username</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            <input type="password" id="loginPassword" class="form-control" />
+                            <label class="form-label" for="loginPassword">Password</label>
+                        </div>
+
+                        <!-- 2 column grid layout -->
+                        <div class="row mb-4">
+                            <div class="col-md-6 d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check mb-3 mb-md-0">
+                                    <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                                    <label class="form-check-label" for="loginCheck"> Remember me </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 d-flex justify-content-center">
+                                <!-- Simple link -->
+                                <a href="#!">Forgot password?</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                    <form>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="registerEmail" class="form-control" />
+                            <label class="form-label" for="registerEmail">Email</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            <input type="password" id="registerPassword" class="form-control" />
+                            <label class="form-label" for="registerPassword">Password</label>
+                        </div>
+
+                        <!-- Repeat Password input -->
+                        <div class="form-outline mb-4">
+                            <input type="password" id="registerRepeatPassword" class="form-control" />
+                            <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Sign up</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Pills content -->
+
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <main class="fade">
+       
         <h3>Z nami juz nigdy nie zmarnujesz jedzenia</h3>
         <p>Dodaj pokarm, ktorego z nami nie zapomnisz zjeść!</p>
         </br>
@@ -32,8 +107,9 @@
         <section>
             <ul></ul>
         </section>
+        <button class="getData">getData</button>
     </main>
-
+    
     <p></p>
 
     <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js'></script>
@@ -41,8 +117,8 @@
     <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js'></script>
 
     <script type="module" src="./environment.js"></script>
-    <script type="module" src="./src/scripts/database.js"></script>
     <script type="module" src="./src/scripts/auth.js"></script>
+    <script type="module" src="./src/scripts/database.js"></script>
     <script type="module" src="./src/scripts/script.js"></script>
 
 
