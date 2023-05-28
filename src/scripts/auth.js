@@ -3,6 +3,7 @@ import {
 } from "../../shared/user.js";
 
 import {
+    hideMain,
     showMain
 } from "./script.js";
 
@@ -13,10 +14,12 @@ const divLog = document.querySelector('#pills-login')
 const divReg = document.querySelector('#pills-register')
 
 // robocza zmienna do ukrycia form
-const divCont = document.querySelector('.div-container');
+const divCont = document.querySelector('.ul-container');
 
-const loginForm = document.querySelector('#loginForm');
-const signUpForm = document.querySelector('#signUpForm');
+const loginForm = document.querySelector('#login-form');
+const signUpForm = document.querySelector('#sign-up-form');
+const logoutBtn = document.querySelector('#logout-btn');
+
 let userId = 'non-empty-string';
 
 export const returnUserId = () => {
@@ -39,6 +42,7 @@ const logRegToggler = () => {
 
         divLog.classList.remove('active')
         divReg.classList.add('active', 'show')
+
     } else {
         return
     }
@@ -47,10 +51,10 @@ const logRegToggler = () => {
 const firebaseLogin = (login, password) => {
     firebase.auth().signInWithEmailAndPassword(login, password)
         .then(response => {
-            divCont.setAttribute('style', 'display: none;');
+            showList()
+            setUserInStorage(login, password);
             showMain()
-            localStorage.setItem('email', login);
-            localStorage.setItem('password', password)
+            showLogoutBtn()
             return userId = response.user.uid;
         })
         .catch(err => {
@@ -59,12 +63,43 @@ const firebaseLogin = (login, password) => {
         });
 }
 
+const showList = () => {
+    divCont.classList.toggle('d-none');
+}
+
+const showLogoutBtn = () => {
+    logoutBtn.classList.toggle('d-none');
+}
+
+const setUserInStorage = ((email, password) => {
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+})
+
+const handleLogout = () => {
+    firebase.auth().signOut().then(() => {
+        clearLocalStorage();
+        showLogForm();
+    }).catch(function (error) {
+        console.log('Błąd podczas wylogowywania z Firebase:', error);
+    });
+}
+
+const clearLocalStorage = () => {
+    localStorage.clear();
+}
+
+const showLogForm = () => {
+    divCont.classList.toggle('d-none');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const savedEmail = localStorage.getItem('email');
     const savedPassword = localStorage.getItem('password');
-    if (savedEmail !== undefined && savedPassword !== undefined) {
-        // console.log(savedEmail, savedPassword)
+    if (savedEmail !== undefined && savedEmail !== null && savedPassword !== undefined && savedPassword !== null) {
         firebaseLogin(savedEmail, savedPassword)
+    } else {
+        return
     }
 });
 
@@ -107,4 +142,12 @@ signUpForm.addEventListener('submit', e => {
                 console.error('Błąd podczas tworzenia konta:', errorCode, errorMessage);
             });
     }
+})
+
+logoutBtn.addEventListener('click', e => {
+    e.preventDefault();
+    handleLogout();
+    // logRegToggler();
+    hideMain();
+    logoutBtn.classList.toggle('d-none');
 })

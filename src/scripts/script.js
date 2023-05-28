@@ -15,9 +15,9 @@ const addToList = (foodObjcs) => {
     foodObjcs.then((arr) => {
         for (let i = 0; i < arr.length; i++) {
             ulEle.innerHTML += `
-            <li data-id=${arr[i].docId}>
-                <div>${arr[i].nameFood}</div>
-                <button>delete</button>
+            <li class="d-flex align-items-center justify-content-between py-1 px-5" data-id=${arr[i].docId}>
+                <div class="mx-5">${arr[i].nameFood}</div>
+                <button class="btn btn-danger">delete</button>
             </li>`;
         }
     })
@@ -30,6 +30,10 @@ export const showMain = async () => {
     } catch (err) {
         console.log(err)
     }
+}
+
+export const hideMain = async () => {
+    main.classList.remove('active', 'show');
 }
 
 const btnGetData = document.querySelector('.getData');
