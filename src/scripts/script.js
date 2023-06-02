@@ -3,6 +3,9 @@ import {
     getData,
     deleteDoc
 } from "./database.js";
+import {
+    returnUserId
+} from "./auth.js"
 
 const addBtn = document.querySelector('.addBtn');
 const foodInput = document.querySelector('input[name="inputFood"]');
@@ -11,7 +14,7 @@ const ulEle = document.querySelector('section ul');
 const main = document.querySelector('main')
 
 const addToList = (foodObjcs) => {
-    ulEle.innerHTML = '';
+    clearUl();
     foodObjcs.then((arr) => {
         for (let i = 0; i < arr.length; i++) {
             ulEle.innerHTML += `
@@ -21,6 +24,10 @@ const addToList = (foodObjcs) => {
             </li>`;
         }
     })
+}
+
+const clearUl = () => {
+    ulEle.innerHTML = '';
 }
 
 export const showMain = async () => {
@@ -37,12 +44,10 @@ export const hideMain = async () => {
 }
 
 const btnGetData = document.querySelector('.getData');
-// putdatabbtn? updateData
 
 btnGetData.addEventListener('click', e => {
     e.preventDefault();
     addToList(getData());
-    // console.log(getData())
 })
 
 addBtn.addEventListener('click', e => {
@@ -51,7 +56,6 @@ addBtn.addEventListener('click', e => {
         food: foodInput.value
     })
     foodInput.value = ''
-    // w przyszlosci mozesz zrobisz .reset() na formularzu, wyczyscisz all inputy
 });
 
 ulEle.addEventListener('click', e => {
@@ -62,15 +66,4 @@ ulEle.addEventListener('click', e => {
     }
 })
 
-// dataCollectionRef.onSnapshot(snapshot => {
-//     const foodObjcs = [];
-//     snapshot.docs.map(doc => {
-//         let docId = doc.id
-//         let nameFood = doc.data().food
-//         foodObjcs.push({
-//             nameFood,
-//             docId
-//         });
-//     })
-//     addToList(foodObjcs)
-// })
+module.exports = addToList

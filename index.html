@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,16 +33,14 @@
                         <form id="login-form">
 
                             <div class="form-outline mb-4">
-                                <input type="email" id="loginName" class="form-control" />
+                                <input type="email" id="loginName" class="form-control">
                                 <label class="form-label" for="loginName">Email or username</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="password" id="loginPassword" class="form-control" />
+                                <input type="password" id="loginPassword" class="form-control">
                                 <label class="form-label" for="loginPassword">Password</label>
                             </div>
-                            <!-- <div class="row mb-4">
-                            </div> -->
                             <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
                         </form>
                     </div>
@@ -49,17 +48,17 @@
                         <form id="sign-up-form">
 
                             <div class="form-outline mb-4">
-                                <input type="email" id="registerEmail" class="form-control" />
+                                <input type="email" id="registerEmail" class="form-control">
                                 <label class="form-label" for="registerEmail">Email</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="password" id="registerPassword" class="form-control" />
+                                <input type="password" id="registerPassword" class="form-control">
                                 <label class="form-label" for="registerPassword">Password</label>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="password" id="registerRepeatPassword" class="form-control" />
+                                <input type="password" id="registerRepeatPassword" class="form-control">
                                 <label class="form-label" for="registerRepeatPassword">Repeat password</label>
                             </div>
 
@@ -69,29 +68,29 @@
                 </div>
             </div>
         </div>
-        <main class="fade">
+    </div>
+    <main class="fade">
 
-            <h3 class="text-center">Z nami juz nigdy nie zmarnujesz jedzenia!</h3>
-            <div class="d-flex my-3">
-                <input class="form-control m-2" type='string' id='inputFood' name='inputFood' placeholder='np. ogórek'>
-                <button class="btn btn-primary mx-3 my-3 addBtn">Dodaj</button>
-            </div>
-            <section>
-                <ul></ul>
-            </section>
-            <button class="btn btn-primary mx-3 my-3 getData">Odśwież liste</button>
-        </main>
+        <h3 class="text-center">Z nami juz nigdy nie zmarnujesz jedzenia!</h3>
+        <div class="d-flex my-3">
+            <input class="form-control m-2" type='text' id='inputFood' name='inputFood'>
+            <button class="btn btn-primary mx-3 my-3 addBtn">Dodaj</button>
+        </div>
+        <section>
+            <h2>Lista produktów:</h2>
+            <ul class="px-0"></ul>
+        </section>
+        <button class="btn btn-primary mx-3 my-3 getData">Odśwież liste</button>
+    </main>
 
-        <p></p>
+    <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js'></script>
+    <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js'></script>
+    <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js'></script>
 
-        <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js'></script>
-        <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js'></script>
-        <script src='https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js'></script>
-
-        <script type="module" src="./environment.js"></script>
-        <script type="module" src="./src/scripts/auth.js"></script>
-        <script type="module" src="./src/scripts/database.js"></script>
-        <script type="module" src="./src/scripts/script.js"></script>
+    <script type="module" src="./environment.js"></script>
+    <script type="module" src="./src/scripts/auth.js"></script>
+    <script type="module" src="./src/scripts/database.js"></script>
+    <script type="module" src="./src/scripts/script.js"></script>
 
 </body>
 

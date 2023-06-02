@@ -13,7 +13,6 @@ const aReg = document.querySelector('#tab-register')
 const divLog = document.querySelector('#pills-login')
 const divReg = document.querySelector('#pills-register')
 
-// robocza zmienna do ukrycia form
 const divCont = document.querySelector('.ul-container');
 
 const loginForm = document.querySelector('#login-form');
@@ -147,7 +146,8 @@ signUpForm.addEventListener('submit', e => {
 logoutBtn.addEventListener('click', e => {
     e.preventDefault();
     handleLogout();
-    // logRegToggler();
     hideMain();
     logoutBtn.classList.toggle('d-none');
 })
+
+module.exports = showLogForm

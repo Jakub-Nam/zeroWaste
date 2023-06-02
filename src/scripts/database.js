@@ -5,19 +5,6 @@ import {
 const db = firebase.firestore();
 
 
-// const foodObjcs = [];
-//     snapshot.docs.map(doc => {
-//         let docId = doc.id
-//         let nameFood = doc.data().food
-//         foodObjcs.push({
-//             nameFood,
-//             docId
-//         });
-//     })
-//     addToList(foodObjcs)
-
-
-
 export async function getData() {
     const food = [];
     try {
@@ -64,3 +51,5 @@ export const deleteDoc = (collection, id) => {
         console.log(err);
     })
 }
+
+module.exports = getData
