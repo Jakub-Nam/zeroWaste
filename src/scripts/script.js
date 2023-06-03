@@ -13,8 +13,8 @@ const ulEle = document.querySelector('section ul');
 
 const main = document.querySelector('main')
 
-const addToList = (foodObjcs) => {
-    clearUl();
+export const addToList = (foodObjcs) => {
+    clearElement(ulEle);
     foodObjcs.then((arr) => {
         for (let i = 0; i < arr.length; i++) {
             ulEle.innerHTML += `
@@ -26,14 +26,14 @@ const addToList = (foodObjcs) => {
     })
 }
 
-const clearUl = () => {
-    ulEle.innerHTML = '';
+export const clearElement = (ele) => {
+    return ele.innerHTML = '';
 }
 
-export const showMain = async () => {
+export const addActiveShowClasses = async (element) => {
     try {
-        await main.classList.add('active', 'show');
-        addToList(getData());
+        await element.classList.add('active', 'show');
+        // addToList(getData());
     } catch (err) {
         console.log(err)
     }
@@ -45,25 +45,26 @@ export const hideMain = async () => {
 
 const btnGetData = document.querySelector('.getData');
 
-btnGetData.addEventListener('click', e => {
-    e.preventDefault();
-    addToList(getData());
-})
+document.addEventListener('DOMContentLoaded', function () {
 
-addBtn.addEventListener('click', e => {
-    e.preventDefault();
-    setData({
-        food: foodInput.value
+    btnGetData.addEventListener('click', e => {
+        e.preventDefault();
+        addToList(getData());
     })
-    foodInput.value = ''
+
+    addBtn.addEventListener('click', e => {
+        e.preventDefault();
+        setData({
+            food: foodInput.value
+        })
+        foodInput.value = ''
+    });
+
+    ulEle.addEventListener('click', e => {
+        e.preventDefault();
+        if (e.target.tagName === 'BUTTON') {
+            const id = e.target.parentElement.getAttribute('data-id');
+            deleteDoc(returnUserId(), id);
+        }
+    })
 });
-
-ulEle.addEventListener('click', e => {
-    e.preventDefault();
-    if (e.target.tagName === 'BUTTON') {
-        const id = e.target.parentElement.getAttribute('data-id');
-        deleteDoc(returnUserId(), id);
-    }
-})
-
-module.exports = addToList

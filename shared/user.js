@@ -4,3 +4,5 @@ export class User {
             this.password = password
     }
 }
+
+// module.exports = User;

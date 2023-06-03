@@ -4,14 +4,17 @@ import {
 
 import {
     hideMain,
-    showMain
+    addActiveShowClasses,
+    addToList
 } from "./script.js";
 
+import { getData } from "./database.js";
 
-const aLog = document.querySelector('#tab-login')
-const aReg = document.querySelector('#tab-register')
-const divLog = document.querySelector('#pills-login')
-const divReg = document.querySelector('#pills-register')
+
+const aLog = document.querySelector('#tab-login');
+const aReg = document.querySelector('#tab-register');
+const divLog = document.querySelector('#pills-login');
+const divReg = document.querySelector('#pills-register');
 
 const divCont = document.querySelector('.ul-container');
 
@@ -47,13 +50,15 @@ const logRegToggler = () => {
     }
 }
 
-const firebaseLogin = (login, password) => {
+const firebaseLogin =  (login, password) => {
     firebase.auth().signInWithEmailAndPassword(login, password)
         .then(response => {
+            const main = document.querySelector('main');
             showList()
-            setUserInStorage(login, password);
-            showMain()
-            showLogoutBtn()
+            setUserInStorage(login, password);      
+            showLogoutBtn();
+            addActiveShowClasses(main);
+            addToList(getData());
             return userId = response.user.uid;
         })
         .catch(err => {
@@ -101,53 +106,56 @@ document.addEventListener('DOMContentLoaded', () => {
         return
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    aLog.addEventListener('click', () => {
+        logRegToggler()
+    })
+    aReg.addEventListener('click', () => {
+        logRegToggler()
+    })
+    loginForm.addEventListener('submit', e => {
+        e.preventDefault();
 
-aLog.addEventListener('click', () => {
-    logRegToggler()
-})
+        const inputEmail = document.querySelector('#loginName').value;
+        const inputPassword = document.querySelector('#loginPassword').value;
+        const user = new User(inputEmail, inputPassword);
 
-aReg.addEventListener('click', () => {
-    logRegToggler()
-})
+        firebaseLogin(user.login, user.password)
+    });
+    signUpForm.addEventListener('submit', e => {
+        e.preventDefault();
 
-loginForm.addEventListener('submit', e => {
-    e.preventDefault();
+        const email = document.querySelector('#registerEmail').value;
+        const password = document.querySelector('#registerPassword').value;
+        const repeatPassword = document.querySelector('#registerRepeatPassword').value;
 
-    const inputEmail = document.querySelector('#loginName').value;
-    const inputPassword = document.querySelector('#loginPassword').value;
-    const user = new User(inputEmail, inputPassword);
+        if (password === repeatPassword) {
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    signUpForm.reset();
+                    logRegToggler();
 
-    firebaseLogin(user.login, user.password)
+                })
+                .catch(error => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error('Błąd podczas tworzenia konta:', errorCode, errorMessage);
+                });
+        }
+    })
+
+    logoutBtn.addEventListener('click', e => {
+        e.preventDefault();
+        handleLogout();
+        hideMain();
+        logoutBtn.classList.toggle('d-none');
+    })
 });
 
-signUpForm.addEventListener('submit', e => {
-    e.preventDefault();
 
-    const email = document.querySelector('#registerEmail').value;
-    const password = document.querySelector('#registerPassword').value;
-    const repeatPassword = document.querySelector('#registerRepeatPassword').value;
 
-    if (password === repeatPassword) {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                signUpForm.reset();
-                logRegToggler();
 
-            })
-            .catch(error => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error('Błąd podczas tworzenia konta:', errorCode, errorMessage);
-            });
-    }
-})
 
-logoutBtn.addEventListener('click', e => {
-    e.preventDefault();
-    handleLogout();
-    hideMain();
-    logoutBtn.classList.toggle('d-none');
-})
 
-module.exports = showLogForm
+// module.exports = returnUserId

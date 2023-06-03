@@ -20,7 +20,6 @@ export async function getData() {
                 docId
             })
         });
-        console.log(food);
         return food
     } catch (error) {
         console.error("Wystąpił błąd podczas pobierania danych:", error);
@@ -52,4 +51,4 @@ export const deleteDoc = (collection, id) => {
     })
 }
 
-module.exports = getData
+// module.exports = getData, setData, deleteDoc
