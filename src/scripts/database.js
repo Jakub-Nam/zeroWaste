@@ -5,10 +5,10 @@ import {
 const db = firebase.firestore();
 
 
-export async function getData() {
+export async function getData(userId) {
     const food = [];
     try {
-        let userId = await returnUserId()
+        // let userId = await returnUserId()
         let dataCollectionRef = await db.collection(userId);
         const snapshot = await dataCollectionRef.get();
         
@@ -30,8 +30,6 @@ export async function getData() {
 export async function setData(data) {
     const timestamp = Date.now();
     try {
-        // console.log(data, 'data')
-        // console.log(returnUserId(), 'returnuserid()');
         const dataRef = db.collection(returnUserId()).doc();
         await dataRef.set({
             food: data.food,

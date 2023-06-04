@@ -54,15 +54,17 @@ const firebaseLogin =  (login, password) => {
     firebase.auth().signInWithEmailAndPassword(login, password)
         .then(response => {
             const main = document.querySelector('main');
+            let userId = response.user.uid;
             showList()
             setUserInStorage(login, password);      
             showLogoutBtn();
             addActiveShowClasses(main);
-            return userId = response.user.uid;
+            addToList(getData(userId));
+            return
         })
         .catch(err => {
             console.log(err)
-            alert('Wystąpił błąd podczas procesu logowania')
+            return alert('Wystąpił błąd podczas procesu logowania')
         });
 }
 
