@@ -3,7 +3,7 @@ import {
 } from "../../shared/user.js";
 
 import {
-    hideMain,
+    removeActiveShowClasses,
     addActiveShowClasses,
     addToList
 } from "./script.js";
@@ -16,6 +16,8 @@ const aReg = document.querySelector('#tab-register');
 const divLog = document.querySelector('#pills-login');
 const divReg = document.querySelector('#pills-register');
 
+
+const main = document.querySelector('main');
 const divCont = document.querySelector('.ul-container');
 
 const loginForm = document.querySelector('#login-form');
@@ -53,8 +55,7 @@ const logRegToggler = () => {
 const firebaseLogin =  (login, password) => {
     firebase.auth().signInWithEmailAndPassword(login, password)
         .then(response => {
-            const main = document.querySelector('main');
-            let userId = response.user.uid;
+            userId = response.user.uid;
             showList()
             setUserInStorage(login, password);      
             showLogoutBtn();
@@ -149,14 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
     logoutBtn.addEventListener('click', e => {
         e.preventDefault();
         handleLogout();
-        hideMain();
+        removeActiveShowClasses(main);
         logoutBtn.classList.toggle('d-none');
     })
 });
-
-
-
-
-
-
-// module.exports = returnUserId
