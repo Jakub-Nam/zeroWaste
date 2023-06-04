@@ -11,7 +11,7 @@ const addBtn = document.querySelector('.addBtn');
 const foodInput = document.querySelector('input[name="inputFood"]');
 const ulEle = document.querySelector('section ul');
 
-const main = document.querySelector('main')
+// const main = document.querySelector('main')
 
 export const addToList = (foodObjcs) => {
     clearElement(ulEle);
@@ -30,17 +30,12 @@ export const clearElement = (ele) => {
     return ele.innerHTML = '';
 }
 
-export const addActiveShowClasses = async (element) => {
-    try {
-        await element.classList.add('active', 'show');
-        // addToList(getData());
-    } catch (err) {
-        console.log(err)
-    }
+export const addActiveShowClasses = (element) => {
+    element.classList.add('active', 'show');
 }
 
-export const hideMain = async () => {
-    main.classList.remove('active', 'show');
+export const removeActiveShowClasses = element => {
+    element.classList.remove('active', 'show');
 }
 
 const btnGetData = document.querySelector('.getData');
@@ -49,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnGetData.addEventListener('click', e => {
         e.preventDefault();
-        addToList(getData());
+        addToList(getData(returnUserId()));
     })
 
     addBtn.addEventListener('click', e => {
