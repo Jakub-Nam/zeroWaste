@@ -58,7 +58,6 @@ const firebaseLogin =  (login, password) => {
             setUserInStorage(login, password);      
             showLogoutBtn();
             addActiveShowClasses(main);
-            addToList(getData());
             return userId = response.user.uid;
         })
         .catch(err => {

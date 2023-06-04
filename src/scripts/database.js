@@ -50,5 +50,3 @@ export const deleteDoc = (collection, id) => {
         console.log(err);
     })
 }
-
-// module.exports = getData, setData, deleteDoc

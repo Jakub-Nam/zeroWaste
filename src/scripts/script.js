@@ -33,7 +33,7 @@ export const clearElement = (ele) => {
 export const addActiveShowClasses = async (element) => {
     try {
         await element.classList.add('active', 'show');
-        // addToList(getData());
+        addToList(getData());
     } catch (err) {
         console.log(err)
     }

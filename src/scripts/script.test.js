@@ -3,6 +3,11 @@ import {
   addActiveShowClasses,
   addToList
 } from './script.js';
+import {
+  getData
+} from './database.js'
+import * as script from './script.js'
+import * as database from './database.js'
 
 jest.mock('./database.js', () => {
   return () => ({
@@ -17,45 +22,39 @@ test('clearElement should clear innerHTML of element', () => {
 })
 
 describe('addActiveShowClasses', () => {
-  test('should add "active" and "show" classes to element', async () => {
+
+  test('should add "active" and "show" classes to an element', () => {
     const div = document.createElement('div');
-    await addActiveShowClasses(div);
+    addActiveShowClasses(div);
     expect(div.classList.contains('active')).toBe(true);
     expect(div.classList.contains('show')).toBe(true);
   });
 
-  // test('call addToList with correct data', async () => {
-  //   const getDataMock = jest.fn().mockReturnValue('sampleData');
-  //   const addToListMock = jest.fn();
-  //   jest.spyOn(global, 'addToList').mockImplementation(addToListMock);
-  //   // Sprawdzenie, czy metoda getData została poprawnie wywołana
-  //   expect(getDataMock).toHaveBeenCalled();
-
-  //   // Sprawdzenie, czy metoda addToList została wywołana z poprawnymi danymi
-  //   expect(addToListMock).toHaveBeenCalledWith('sampleData');
-
-  //   // Przywrócenie oryginalnej implementacji metody addToList
-  //   global.addToList.mockRestore();
-  // })
-  test('call addToList with correct data', () => {
-    const getDataMock = jest.fn().mockReturnValue('sampleData');
+  test('addToList should be called', () => {
     const addToListMock = jest.fn();
-    jest.replaceProperty(global, 'addToList', {
-      value: addToListMock
-    });
-  
-    // Sprawdzenie, czy metoda getData została poprawnie wywołana
-    expect(getDataMock).toHaveBeenCalled();
-  
+    jest.spyOn(script, 'addToList').mockImplementation(addToListMock);
+
+    addToList('sampleData');
+    // addToListMock('sampleData');
     // Sprawdzenie, czy metoda addToList została wywołana z poprawnymi danymi
     expect(addToListMock).toHaveBeenCalledWith('sampleData');
-  
-    // Przywrócenie oryginalnej wartości właściwości addToList
-    jest.restoreAllMocks();
+
+    // Przywrócenie oryginalnej implementacji addToList
+    script.addToList.mockRestore();
+  });
+
+  test('getData should be called', () => {
+    const getDataMock = jest.fn();
+    // const getDataMock = jest.fn().mockReturnValue();
+    jest.spyOn(database, 'getData').mockImplementation(getDataMock);
+
+    getData();
+    // Sprawdzenie, czy metoda getData została poprawnie wywołana
+    expect(getDataMock).toHaveBeenCalled();
+
   });
 
 });
-// Mockowanie metody addToList
 
 
 // 
